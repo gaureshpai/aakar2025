@@ -39,7 +39,7 @@ const AdminPortal = () => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);  
-  const [currentId, setCurrentId] = useState<number | null>(null);
+  const [currentId, setCurrentId] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [error, setError] = useState('');
   const [stats, setStats] = useState({
@@ -47,7 +47,7 @@ const AdminPortal = () => {
     totalEvents: 0
   });
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [adminToDelete, setAdminToDelete] = useState<number | null>(null);
+  const [adminToDelete, setAdminToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAdmins();
@@ -199,12 +199,12 @@ const AdminPortal = () => {
     setOpenDialog(true);
   };
 
-  const confirmDelete = (id: number) => {
+  const confirmDelete = (id: string) => {
     setAdminToDelete(id);
     setDeleteDialogOpen(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       const response = await deleteAdmin(id);
 

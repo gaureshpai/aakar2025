@@ -32,7 +32,7 @@ export async function getAdmins() {
     return await db.admin.findMany()
 }
 
-export async function getAdmin(id: number) {
+export async function getAdmin(id: string) {
     if (!await isAdmin()) return null;
     return await db.admin.findUnique({
         where: {
@@ -51,7 +51,7 @@ export async function createAdmin(admin: Prisma.AdminCreateInput) {
     })
 }
 
-export async function deleteAdmin(id: number) {
+export async function deleteAdmin(id: string) {
     if (!await isAdmin()) return null;
     return await db.admin.delete({
         where: {
@@ -60,7 +60,7 @@ export async function deleteAdmin(id: number) {
     })
 }
 
-export async function updateAdmin(id: number, admin: Prisma.AdminUpdateInput) {
+export async function updateAdmin(id: string, admin: Prisma.AdminUpdateInput) {
     if (!await isAdmin()) return null;
     return await db.admin.update({
         where: {

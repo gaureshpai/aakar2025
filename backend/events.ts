@@ -8,7 +8,7 @@ const eventsCache = {
     date: null as Date | null,
     events: [] as ExtendedEvent[],
     categoryEvents: {} as Record<eventCategory, { date: Date, events: ExtendedEvent[] }>,
-    eventById: {} as Record<number, { date: Date, event: ExtendedEvent }>
+    eventById: {} as Record<string, { date: Date, event: ExtendedEvent }>
 }
 
 function isCacheValid(cacheDate: Date | null) {
@@ -37,7 +37,7 @@ export async function createEvent(event: ExtendedEventCreateInput) {
     }
 }
 
-export async function getEventById(id: number) {
+export async function getEventById(id: string) {
     try {
         if (eventsCache.eventById[id] && isCacheValid(eventsCache.eventById[id].date)) {
             return eventsCache.eventById[id].event;
@@ -110,7 +110,7 @@ export async function getEventsByCategory(eventCategory: eventCategory) {
     }
 }
 
-export async function getEventsOfUser(userId: number) {
+export async function getEventsOfUser(userId: string) {
     try {
         return (await db.participant.findUnique({
             where: {
@@ -128,21 +128,21 @@ export async function getEventsOfUser(userId: number) {
 
 export async function getEventsOfAllUsers() {
     try {
-        return await db.participant.findMany({
+        const participants = await db.participant.findMany({
             select: {
                 id: true,
                 events: true
             }
-        }).then((participants) => {
-            let a = {} as Record<number, ExtendedEvent[]>;
-            participants.forEach((participant) => {
-                a[participant.id] = participant.events as ExtendedEvent[];
-            })
-            return a;
         })
+
+        let a = {} as Record<string, ExtendedEvent[]>;
+        participants.forEach((participant) => {
+            a[participant.id] = participant.events as ExtendedEvent[];
+        })
+        return a;
     } catch (e) {
         console.error("Get Events Of All Users Error:", e);
-        return [];
+        return {} as Record<string, ExtendedEvent[]>;
     }
 }
 
@@ -175,7 +175,7 @@ export async function getEventOptions() {
     }
 }
 
-export async function getEventsTotalFee(eventIds: number[]) {
+export async function getEventsTotalFee(eventIds: string[]) {
     try {
         if (isCacheValid(eventsCache.date) && eventsCache.events.length > 0) {
             const cachedEvents = eventsCache.events.filter(event => eventIds.includes(event.id));
@@ -211,7 +211,7 @@ export async function getTotalEvents() {
     }
 }
 
-export async function updateEvent(id: number, data: ExtendedEventCreateInput) {
+export async function updateEvent(id: string, data: ExtendedEventCreateInput) {
     try {
         if (!await isAdmin()) throw new Error("Not authorized");
         const updatedEvent = await db.event.update({
@@ -231,7 +231,7 @@ export async function updateEvent(id: number, data: ExtendedEventCreateInput) {
     }
 }
 
-export async function deleteEvent(id: number) {
+export async function deleteEvent(id: string) {
     try {
         if (!await isAdmin()) throw new Error("Not authorized");
         const deletedEvent = await db.event.delete({

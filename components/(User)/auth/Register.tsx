@@ -55,7 +55,7 @@ const Register = () => {
             value: string;
             label: string;
             type: eventType;
-            id: number;
+            id: string;
         }[]
     >([]);
     const [groupEventData, setGroupEventData] = useState<{
@@ -259,7 +259,7 @@ const Register = () => {
         Object.keys(groupEventData).forEach((groupId) => {
             if (
                 selectedEvents.find(
-                    (e) => e.value === groupId || e.id === parseInt(groupId)
+                    (e) => e.value === groupId || e.id === groupId
                 )
             ) {
                 groupEventData[groupId].members.forEach((member, index) => {
@@ -326,7 +326,7 @@ const Register = () => {
                 transaction_ids: [formData.transactionId],
                 paymentScreenshotUrls: [fileUrl],
                 groupMembersData: groupEventData,
-                amount: totalAmount
+                amount: totalAmount,
             };
 
             const { data, error } = await registerParticipant(
@@ -628,7 +628,7 @@ const Register = () => {
                                     </label>
                                     <input
                                         id="year"
-                                        value={formData.year||""}
+                                        value={formData.year || ""}
                                         min={1}
                                         max={8}
                                         step={1}

@@ -4,7 +4,7 @@ import React from "react";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
-    const eventData = await getEventById(parseInt(id));
+    const eventData = await getEventById(id);
 
     return (
         <Eventdescription eventData={eventData}/>

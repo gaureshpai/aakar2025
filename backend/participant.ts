@@ -62,7 +62,7 @@ export async function createParticipant(data: ExtendedParticipantCreateInput): P
     }
 }
 
-export async function registerParticipant(data: ExtendedParticipantCreateInput, events: number[]): Promise<ServiceResponse<ExtendedParticipant>> {
+export async function registerParticipant(data: ExtendedParticipantCreateInput, events: string[]): Promise<ServiceResponse<ExtendedParticipant>> {
     try {
         const { data: participant, error } = await createParticipant({ ...data, events: { connect: events.map(e => ({ id: e })) }, email: data.email.toLowerCase(), usn: data.usn.toUpperCase() });
 
@@ -120,7 +120,7 @@ export async function getParticipantsCount() {
     return usns.size;
 }
 
-export async function getParticipantsCountForEvent(eventId: number) {
+export async function getParticipantsCountForEvent(eventId: string) {
     const event = await getEventById(eventId);
     if (!event) {
         return 0;
@@ -162,7 +162,7 @@ export async function getCollegeNames(){
 
 }
 
-export async function getParticipant(id: number): Promise<ServiceResponse<ExtendedParticipant>> {
+export async function getParticipant(id: string): Promise<ServiceResponse<ExtendedParticipant>> {
     try {
         if (!id) {
             return { data: null, error: { id: "Participant ID is required" } };
@@ -217,7 +217,7 @@ export async function getParticipantsWithFilter(where: Prisma.ParticipantWhereIn
     }
 }
 
-export async function updateParticipantWithNotify(id: number, data: Prisma.ParticipantUpdateInput): Promise<ServiceResponse<ExtendedParticipant>> {
+export async function updateParticipantWithNotify(id: string, data: Prisma.ParticipantUpdateInput): Promise<ServiceResponse<ExtendedParticipant>> {
     try {
         let res = await updateParticipant(id, data);
         if (!res.data || res.error) {
@@ -263,7 +263,7 @@ Aakar 2025 Team`);
     }
 }
 
-export async function updateParticipant(id: number, data: Prisma.ParticipantUpdateInput): Promise<ServiceResponse<ExtendedParticipant>> {
+export async function updateParticipant(id: string, data: Prisma.ParticipantUpdateInput): Promise<ServiceResponse<ExtendedParticipant>> {
     try {
         if (!id) {
             return { data: null, error: { id: "Participant ID is required" } };
@@ -288,7 +288,7 @@ export async function updateParticipant(id: number, data: Prisma.ParticipantUpda
     }
 }
 
-export async function deleteParticipant(id: number): Promise<ServiceResponse<ExtendedParticipant>> {
+export async function deleteParticipant(id: string): Promise<ServiceResponse<ExtendedParticipant>> {
     try {
         if (!id) {
             return { data: null, error: { id: "Participant ID is required" } };

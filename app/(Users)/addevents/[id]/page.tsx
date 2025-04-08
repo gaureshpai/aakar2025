@@ -27,7 +27,7 @@ export default function AddAdditionalEvents({
     params: Promise<{ id: string }>;
 }) {
     const router = useRouter();
-    const userId = parseInt(use(params).id);
+    const userId = use(params).id;
 
     // States for data management
     const [events, setEvents] = useState<ExtendedEvent[]>([]);
@@ -39,7 +39,7 @@ export default function AddAdditionalEvents({
             value: string;
             label: string;
             type: eventType;
-            id: number;
+            id: string;
         }[]
     >([]);
     const [selectedEvents, setSelectedEvents] = useState<
@@ -47,7 +47,7 @@ export default function AddAdditionalEvents({
             value: string;
             label: string;
             type: eventType;
-            id: number;
+            id: string;
         }[]
     >([]);
     const [groupEventData, setGroupEventData] = useState<
@@ -181,7 +181,7 @@ export default function AddAdditionalEvents({
     };
 
     // Handle participant count change for team events
-    const handleParticipantCountChange = (eventId: number, count: number) => {
+    const handleParticipantCountChange = (eventId: string, count: number) => {
         const currentData = groupEventData?.[eventId] || {
             participantCount: 1,
             members: [{ name: "", usn: "", email: "" }],
@@ -213,7 +213,7 @@ export default function AddAdditionalEvents({
 
     // Handle changing group member details
     const handleGroupMemberChange = (
-        eventId: number,
+        eventId: string,
         index: number,
         field: "name" | "usn" | "email",
         value: string
@@ -230,7 +230,7 @@ export default function AddAdditionalEvents({
         setGroupEventData((prev) => ({
             ...prev,
             [eventId]: {
-                ...prev?.[eventId],
+                ...prev?.[eventId]!,
                 members: updatedMembers,
             },
         }));

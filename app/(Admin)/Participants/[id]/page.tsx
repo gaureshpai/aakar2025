@@ -26,9 +26,9 @@ export default function ParticipantDetailPage() {
     const fetchParticipantDetails = async () => {
       try {
         setIsLoading(true)
-        const participantId = Array.isArray(id) ? Number.parseInt(id[0]) : Number.parseInt(id as string)
+        const participantId = Array.isArray(id) ? id[0] : id
 
-        if (isNaN(participantId)) {
+        if (!participantId) {
           setError("Invalid participant ID")
           return
         }

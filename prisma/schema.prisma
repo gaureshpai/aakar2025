@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -20,7 +20,7 @@ enum eventType {
 }
 
 model Participant {
-  id                    Int      @id @default(autoincrement())
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
   name                  String
   usn                   String   @unique
   phone                 String
@@ -38,7 +38,7 @@ model Participant {
 }
 
 model Event {
-  id                  Int           @id @default(autoincrement())
+  id                  String        @id @default(auto()) @map("_id") @db.ObjectId
   eventName           String
   eventCategory       eventCategory @default(Technical)
   eventType           eventType     @default(Solo)
@@ -54,11 +54,11 @@ model Event {
   rules               String[]
   imageUrl            String
   Participants        Participant?  @relation(fields: [participantId], references: [id])
-  participantId       Int?
+  participantId       String?       @db.ObjectId
 }
 
 model Admin {
-  id       Int    @id @default(autoincrement())
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   phone    String @unique
   password String

@@ -174,9 +174,9 @@ export default function ParticipantsPage() {
         setFilteredParticipants(participants);
     };
 
-    const toggleParticipantExpanded = (id: number) => {
+    const toggleParticipantExpanded = (id: string) => {
         setExpandedParticipant(
-            expandedParticipant === id.toString() ? null : id.toString()
+            expandedParticipant === id ? null : id
         );
     };
 

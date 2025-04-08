@@ -14,8 +14,6 @@ export default auth(async (req, ctx) => {
 
             if (adminData.isAdmin) {
                 return NextResponse.redirect(req.nextUrl.origin + '/AdminPortal');
-            } else {
-                return NextResponse.redirect(req.nextUrl.origin + '/Participants');
             }
         }
 

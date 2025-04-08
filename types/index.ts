@@ -28,4 +28,4 @@ export interface ExtendedParticipantCreateInput extends Prisma.ParticipantCreate
     }
 }
 
-export type CartEvents = number[];
+export type CartEvents = string[];

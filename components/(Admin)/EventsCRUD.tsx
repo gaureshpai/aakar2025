@@ -105,7 +105,7 @@ const EventsCRUD = () => {
     const [loading, setLoading] = useState(true);
     const [openDialog, setOpenDialog] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [currentId, setCurrentId] = useState<number | null>(null);
+    const [currentId, setCurrentId] = useState<string | null>(null);
     const [error, setError] = useState("");
     const [newStudentCoordinator, setNewStudentCoordinator] =
         useState<Coordinator>({
@@ -381,7 +381,7 @@ const EventsCRUD = () => {
         }
     };
 
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (id: string) => {
         try {
             const eventToDelete = events.find((event) => event.id === id);
             await deleteEvent(id);
@@ -669,7 +669,9 @@ const EventsCRUD = () => {
                                         </Label>
                                         <Select
                                             value={formData.eventCategory}
-                                            onValueChange={(value: eventCategory) =>
+                                            onValueChange={(
+                                                value: eventCategory
+                                            ) =>
                                                 handleSelectChange(
                                                     "eventCategory",
                                                     value
