@@ -169,7 +169,7 @@ export const metadata: Metadata = {
         description:
             "Tech meets culture at AAKAR 2025! Explore innovation, creativity, and fun at our annual fest.",
         images: ["https://aakar2025.in/Aakarlogo.svg"],
-        creator: "@aakar2025",
+        creator: "@aakar__2025",
     },
 };
 
