@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, use } from "react";
 import Select from "react-select";
 import Link from "next/link";
@@ -288,7 +289,7 @@ export default function AddAdditionalEvents({
             await addUserEvents(selectedEvents, groupEventData);
 
             setTimeout(() => {
-                router.push(`/`);
+                router.push(`/registration-success`);
             }, 2000);
         } catch (error) {
             console.error("Error submitting form:", error);

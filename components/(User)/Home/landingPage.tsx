@@ -195,7 +195,7 @@ const LandingPage = () => {
                                     autoPlay
                                     playsInline
                                     preload="none"
-                                    poster="/concert.png"
+                                    poster="/Concert.png"
                                 />
 
                                 <div className="absolute bottom-3 right-3 z-10 cursor-pointer">
