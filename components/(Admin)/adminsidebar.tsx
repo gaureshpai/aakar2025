@@ -9,6 +9,8 @@ import {
     ChevronLeft,
     LogOut,
     User,
+    BarChart,
+    School,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
@@ -31,7 +33,17 @@ const AdminSidebar = () => {
             icon: <User size={18} />,
             label: "Participants",
             href: "/Participants",
-        }
+        },
+        {
+            icon: <BarChart size={18} />,
+            label: "Event Stats",
+            href: "/EventStatistics",
+        },
+        {
+            icon: <School size={18} />,
+            label: "College Stats",
+            href: "/CollegeStatistics",
+        },
     ];
 
     const toggleSidebar = () => setIsOpen(!isOpen);
@@ -93,7 +105,7 @@ const AdminSidebar = () => {
                     </div>
 
                     {isOpen && (
-                        <div className="absolute bottom-0 left-0 w-1/2 block">
+                        <div className="absolute bottom-0 left-0 w-1/3 block">
                             <img
                                 src="/profile-ch-left.png"
                                 alt="Sidebar Character"

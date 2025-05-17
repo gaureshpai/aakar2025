@@ -372,7 +372,7 @@ export function EventStats({ participants }: EventStatsProps) {
         })}
       </div>
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs defaultValue="all" className="w-full hidden md:flex">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="all" className="cursor-pointer">All Registrations</TabsTrigger>
           <TabsTrigger value="ajiet" className="cursor-pointer">AJIET Students</TabsTrigger>

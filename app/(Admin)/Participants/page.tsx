@@ -31,21 +31,16 @@ import {
     Search,
     School,
     FileSpreadsheet,
-    Users,
     ChevronDown,
     ChevronRight,
-    Calendar,
     ChevronLeft,
     ChevronFirst,
     ChevronLast,
-    SlidersHorizontal,
 } from "lucide-react";
 import React from "react";
 import { getParticipantsWithEvents } from "@/backend/participant";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { EventStats } from "@/components/(Admin)/event-stats"
-import { CollegeStats } from "@/components/(Admin)/college-stats"
 import { Skeleton } from "@/components/ui/skeleton";
 import { downloadEventRegistrationsByCollege, downloadParticipantData, downloadParticipantDataByEvents } from "./utils";
 import { ExtendedEvent, ExtendedParticipant } from "@/types";
@@ -351,30 +346,6 @@ export default function ParticipantsPage() {
                 </CardHeader>
                 <CardContent>
                     <Tabs defaultValue="participants">
-                        <TabsList className="md:flex-row flex-col mt-4 mb-8 md:mb-4  gap-4 hidden md:flex">
-                            <TabsTrigger
-                                value="participants"
-                                className="cursor-pointer"
-                            >
-                                <Users className="mr-2 h-4 w-4" />
-                                Participants
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="events"
-                                className="cursor-pointer"
-                            >
-                                <Calendar className="mr-2 h-4 w-4" />
-                                Event Statistics
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="colleges"
-                                className="cursor-pointer"
-                            >
-                                <School className="mr-2 h-4 w-4" />
-                                College Statistics
-                            </TabsTrigger>
-                        </TabsList>
-
                         <TabsContent value="participants">
                             <div className="space-y-4">
                                 <div className="flex flex-col md:flex-row gap-4 items-start md:items-end">
@@ -720,36 +691,6 @@ export default function ParticipantsPage() {
 
                                 {!isLoading && <PaginationControls />}
                             </div>
-                        </TabsContent>
-
-                        <TabsContent value="events">
-                            {isLoading ? (
-                                <div className="space-y-4">
-                                    <Skeleton className="h-8 w-64" />
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <Skeleton className="h-32 w-full" />
-                                        <Skeleton className="h-32 w-full" />
-                                        <Skeleton className="h-32 w-full" />
-                                    </div>
-                                    <Skeleton className="h-64 w-full" />
-                                </div>
-                            ) : (
-                                <EventStats participants={allParticipants} />
-                            )}
-                        </TabsContent>
-
-                        <TabsContent value="colleges">
-                            {isLoading ? (
-                                <div className="space-y-4">
-                                    <Skeleton className="h-8 w-64" />
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <Skeleton className="h-64 w-full" />
-                                        <Skeleton className="h-64 w-full" />
-                                    </div>
-                                </div>
-                            ) : (
-                                <CollegeStats participants={allParticipants} />
-                            )}
                         </TabsContent>
                     </Tabs>
                 </CardContent>

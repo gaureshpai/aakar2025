@@ -222,7 +222,7 @@ export function CollegeStats({ participants }: CollegeStatsProps) {
           <CardTitle>Registrations by College</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-screen w-full">
+          <div className="h-screen w-full overflow-hidden">
             {collegeData.length === 0 ? (
               <div className="flex justify-center items-center h-full text-muted-foreground">
                 No college data available
